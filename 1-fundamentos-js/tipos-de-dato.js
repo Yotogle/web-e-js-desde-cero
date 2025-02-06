@@ -22,6 +22,19 @@ console.log(  letras = "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z" )
 console.log( 58 * 4)
 
  if( 1 + 1 == 2) {
-    console.log( "1 + 1 es igual a 2")
+    console.log( typeof "1 + 1 es igual a 2")
+
 }
+
+console.log(9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999)
+
+console.log(99.99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999)
+
+console.log(2/254415485)
+
+console.log(3/0) 
+
+console.log(0/0)        
+
+console.log(2**1024)
 
