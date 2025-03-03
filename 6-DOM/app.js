@@ -15,6 +15,7 @@ let comentar = (event) => {
 
         
         const texto = document.createElement("p");
+        date: "";
         texto.textContent = textoComentario;
         nuevoComentario.appendChild(texto);
 
