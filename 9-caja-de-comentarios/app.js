@@ -1,28 +1,75 @@
 
-/* const parrafo = document.getElementById("txt") */
+const userForm = document.getElementById("userForm");
+const inputUsuario = document.getElementById("inputUsuario");
+const btnGuardarUsuario = document.getElementById("btnGuardarUsuario");
+const commentForm = document.getElementById("commentForm");
+const inputComment = document.getElementById("inputComentario");
+const boxComments = document.getElementsByClassName("comentarios")[0];
 
-//2. Creación de funciones
-/* let modificar = () => {
-    parrafo.innerText = "JavaScript DOM 🔥"
-    parrafo.style.color = "tomato"
-    parrafo.style.fontSize = "2rem"
-    parrafo.style.textDecoration = "underline"
-    parrafo.style.fontStyle = "italic"
-} */
+let usuario = "";
 
 
-//Captura de elementos por tag
-/* const listaElements = document.getElementsByClassName("list") */
+btnGuardarUsuario.addEventListener("click", function (event) {
+    event.preventDefault();
+    const nombreUsuario = inputUsuario.value.trim();
+    if (nombreUsuario !== "") {
+        usuario = nombreUsuario;
+        userForm.style.display = "none"; // Ocultar formulario de usuario
+        commentForm.style.display = "flex"; // Mostrar formulario de comentarios
+    } else {
+        alert("Por favor, ingresa un nombre de usuario válido.");
+    }
+});
 
-const inputComment = document.getElementById("inputComentario")
-const btnComment = document.getElementsByTagName("button")[0]
-const boxComments = document.getElementsByClassName("comentarios")[0]
 
-let comentar = (event) => {
-    event.preventDefault() //Previene que se actualice el sitio al dar click en comentar
-    console.log(inputComment.value)
-    boxComments.innerHTML += `<li>${inputComment.value}</li>`
-    inputComment.value = ""
+function obtenerFechaHora() {
+    const ahora = new Date();
+    const fecha = ahora.toLocaleDateString();
+    const hora = ahora.toLocaleTimeString();
+    return `${fecha} ${hora}`;
 }
 
-btnComment.addEventListener("click",comentar)
+function agregarComentario(event) {
+    event.preventDefault();
+    const textoComentario = inputComment.value.trim();
+
+    if (textoComentario !== "") {
+    
+        const nuevoComentario = document.createElement("div");
+        nuevoComentario.classList.add("comentario");
+
+      
+        const usuarioElement = document.createElement("p");
+        usuarioElement.classList.add("usuario");
+        usuarioElement.textContent = usuario;
+        nuevoComentario.appendChild(usuarioElement);
+
+      
+        const texto = document.createElement("p");
+        texto.textContent = textoComentario;
+        nuevoComentario.appendChild(texto);
+
+      
+        const fechaElement = document.createElement("p");
+        fechaElement.classList.add("fecha");
+        fechaElement.textContent = obtenerFechaHora();
+        nuevoComentario.appendChild(fechaElement);
+
+       
+        const btnEliminar = document.createElement("button");
+        btnEliminar.textContent = "Eliminar";
+        btnEliminar.type = "button";
+        btnEliminar.onclick = () => nuevoComentario.remove();
+        nuevoComentario.appendChild(btnEliminar);
+
+        boxComments.appendChild(nuevoComentario);
+
+      
+        inputComment.value = "";
+    } else {
+        alert("Por favor, escribe un comentario válido.");
+    }
+}
+
+
+commentForm.addEventListener("submit", agregarComentario);
